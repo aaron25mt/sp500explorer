@@ -26,8 +26,6 @@ const getStockStats = (ticker, next) => {
   .then(results => {
     return next(null, results.data)
   }).catch(error => {
-    console.log("huh?")
-    console.log(error)
     return next(error)
   })
 }
