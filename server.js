@@ -1,8 +1,11 @@
 const express = require("express")
 const app = express()
+const cors = require("cors")
 const PORT = 3000
 
 const { getCurrentSP500Companies, getCurrentSP500CompaniesLogos, getStockStats } = require("./func")
+
+app.use(cors())
 
 app.get("/sp500", (req, res) => {
   getCurrentSP500Companies((error, companies) => {
