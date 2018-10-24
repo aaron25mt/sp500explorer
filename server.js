@@ -2,12 +2,19 @@ const express = require("express")
 const app = express()
 const PORT = 3000
 
-const { getCurrentSP500Companies, getStockStats } = require("./func")
+const { getCurrentSP500Companies, getCurrentSP500CompaniesLogos, getStockStats } = require("./func")
 
 app.get("/sp500", (req, res) => {
   getCurrentSP500Companies((error, companies) => {
     if (error) return res.status(500).json({error})
-    return res.status(200).json({"data": companies})
+    return res.status(200).json(companies)
+  })
+})
+
+app.get("/sp500logos", (req, res) => {
+  getCurrentSP500CompaniesLogos((error, logos) => {
+    if (error) return res.status(500).json({error})
+    return res.status(200).json(logos)
   })
 })
 
@@ -16,7 +23,7 @@ app.get("/stock/:ticker", (req, res) => {
 
   getStockStats(ticker, (error, stats) => {
     if (error) return res.status(500).json({error})
-    return res.status(200).json({"data": stats})
+    return res.status(200).json(stats)
   })
 })
 
